@@ -233,8 +233,8 @@ function sumOfCodes(str) {
  *   startsWith('Hello World', 'World') => false
  *   startsWith('Hello World', 'Hello') => true
  */
-function startsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function startsWith(str, substr) {
+  return str.startsWith(substr);
 }
 
 /**
@@ -248,8 +248,8 @@ function startsWith(/* str, substr */) {
  *   endsWith('Hello World', 'World') => true
  *   endsWith('Hello World', 'Hello') => false
  */
-function endsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function endsWith(str, substr) {
+  return str.endsWith(substr);
 }
 
 /**
@@ -265,8 +265,15 @@ function endsWith(/* str, substr */) {
  *   formatTime(0, 45) => "00:45"
  *   formatTime(0, 0) => "00:00"
  */
-function formatTime(/* minutes, seconds */) {
-  throw new Error('Not implemented');
+function formatTime(minutes, seconds) {
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
+  if (seconds < 10) {
+    seconds = '0' + seconds;
+  }
+
+  return `${minutes}:${seconds}`;
 }
 
 /**
@@ -279,8 +286,14 @@ function formatTime(/* minutes, seconds */) {
  *   reverseString('abcdef') => 'fedcba'
  *   reverseString('12345') => '54321'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  let result = '';
+
+  for (let index = str.length - 1; index >= 0; index -= 1) {
+    result += str[index];
+  }
+
+  return result;
 }
 
 /**
@@ -294,8 +307,8 @@ function reverseString(/* str */) {
  *   orderAlphabetically('textbook') => 'bekoottx'
  *   orderAlphabetically('abc123xyz') => '123abcxyz'
  */
-function orderAlphabetically(/* str */) {
-  throw new Error('Not implemented');
+function orderAlphabetically(str) {
+  return str.split('').sort().join('');
 }
 
 /**
@@ -310,8 +323,8 @@ function orderAlphabetically(/* str */) {
  *   containsSubstring('JavaScript is Fun', 'Python') => false
  *   containsSubstring('12345', '34') => true
  */
-function containsSubstring(/* str, substring */) {
-  throw new Error('Not implemented');
+function containsSubstring(str, substring) {
+  return str.includes(substring);
 }
 
 /**
@@ -328,8 +341,30 @@ function containsSubstring(/* str, substring */) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  const setOfVowels = new Set([
+    'a',
+    'e',
+    'i',
+    'o',
+    'u',
+    'y',
+    'A',
+    'E',
+    'I',
+    'O',
+    'U',
+    'Y',
+  ]);
+  let count = 0;
+
+  for (const char of str) {
+    if (setOfVowels.has(char)) {
+      count++;
+    }
+  }
+
+  return count;
 }
 
 /**
@@ -345,8 +380,26 @@ function countVowels(/* str */) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+
+function isPalindrome(str) {
+  let pointer1 = 0;
+  let pointer2 = str.length - 1;
+  while (pointer1 <= pointer2) {
+    if (!str[pointer1].match(/[a-zA-Z0-9]/)) {
+      pointer1 += 1;
+    } else if (!str[pointer2].match(/[a-zA-Z0-9]/)) {
+      pointer2 -= 1;
+    } else {
+      if (str[pointer1].toLowerCase() !== str[pointer2].toLowerCase()) {
+        return false;
+      }
+
+      pointer1 += 1;
+      pointer2 -= 1;
+    }
+  }
+
+  return true;
 }
 
 /**
@@ -361,8 +414,34 @@ function isPalindrome(/* str */) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord(/* sentence */) {
-  throw new Error('Not implemented');
+function findLongestWord(sentence) {
+  const arrOfWords = sentence.split(' ');
+  const map = {};
+
+  for (let i = 0; i < arrOfWords.length; i += 1) {
+    const wordLength = arrOfWords[i].length;
+    const word = arrOfWords[i];
+
+    if (map[word] === undefined) {
+      map[word] = wordLength;
+    }
+  }
+
+  let result = arrOfWords[0];
+  let maxCount = map[result];
+
+  for (let index = 1; index < arrOfWords.length; index += 1) {
+    const currentWord = arrOfWords[index];
+    const currentLength = map[currentWord];
+
+    if (currentLength > maxCount) {
+      maxCount = currentLength;
+      result = currentWord;
+    }
+  }
+
+  return result;
+
 }
 
 /**

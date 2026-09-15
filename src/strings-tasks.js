@@ -19,11 +19,11 @@
  *   getStringLength(null) => 0
  *   getStringLength(undefined) => 0
  */
-function getStringLength(str) {
-  if (typeof str !== 'string') {
+function getStringLength(value) {
+  if (typeof value !== 'string') {
     return 0;
   }
-  return str.length;
+  return value.length;
 }
 
 /**
@@ -40,11 +40,8 @@ function getStringLength(str) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(str) {
-  if (typeof str !== 'string' && !(str instanceof String)) {
-    return false;
-  }
-  return true;
+function isString(value) {
+  return !(typeof value !== 'string' && !(value instanceof String));
 }
 
 /**
@@ -189,8 +186,18 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  if (value === '') {
+    return str;
+  }
+
+  for (let index = str.length - 1; index >= 0; index -= 1) {
+    if (str.startsWith(value, index)) {
+      return str.slice(0, index) + str.slice(index + value.length);
+    }
+  }
+
+  return str;
 }
 
 /**

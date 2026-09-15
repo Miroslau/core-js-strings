@@ -59,8 +59,8 @@ function isString(str) {
  *   concatenateStrings('aa', '') => 'aa'.
  *   concatenateStrings('', 'bb') => 'bb'
  */
-function concatenateStrings(str1, str2) {
-  return str1 + str2;
+function concatenateStrings(value1, value2) {
+  return value1 + value2;
 }
 
 /**
@@ -74,8 +74,8 @@ function concatenateStrings(str1, str2) {
  *   getFirstChar('cat') => 'c'
  *   getFirstChar('') => ''
  */
-function getFirstChar(str) {
-  return !str ? '' : str[0];
+function getFirstChar(value) {
+  return !value ? '' : value[0];
 }
 
 /**
@@ -89,8 +89,8 @@ function getFirstChar(str) {
  *   removeLeadingAndTrailingWhitespaces('cat ') => 'cat'
  *   removeLeadingAndTrailingWhitespaces('\t\t\tHello, World! ') => 'Hello, World!'
  */
-function removeLeadingAndTrailingWhitespaces(/* value */) {
-  throw new Error('Not implemented');
+function removeLeadingAndTrailingWhitespaces(value) {
+  return value.trim();
 }
 
 /**

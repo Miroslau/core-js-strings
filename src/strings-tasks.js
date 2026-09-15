@@ -57,7 +57,7 @@ function isString(value) {
  *   concatenateStrings('', 'bb') => 'bb'
  */
 function concatenateStrings(value1, value2) {
-  return value1 + value2;
+  return value1.concat(value2);
 }
 
 /**
@@ -72,7 +72,7 @@ function concatenateStrings(value1, value2) {
  *   getFirstChar('') => ''
  */
 function getFirstChar(value) {
-  return !value ? '' : value[0];
+  return value.charAt(0);
 }
 
 /**
@@ -102,7 +102,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   removeLeadingWhitespaces('\t\t\tHello, World! ') => 'Hello, World! '
  */
 function removeLeadingWhitespaces(value) {
-  return value.replace(/^\s+/, '');
+  return value.trimStart();
 }
 
 /**
@@ -134,17 +134,7 @@ function removeTrailingWhitespaces(value) {
  *   repeatString('abc', -2) => ''
  */
 function repeatString(str, times) {
-  let result = '';
-
-  if (str === '' || times < 0) {
-    return '';
-  }
-
-  for (let index = 0; index < times; index += 1) {
-    result += str;
-  }
-
-  return result;
+  return times < 0 ? '' : str.repeat(times);
 }
 
 /**
@@ -161,17 +151,11 @@ function repeatString(str, times) {
  */
 
 function removeFirstOccurrences(str, value) {
-  if (value === '') {
+  const index = str.indexOf(value);
+  if (index === -1) {
     return str;
   }
-
-  for (let index = 0; index < str.length; index += 1) {
-    if (str.startsWith(value, index)) {
-      return str.slice(0, index) + str.slice(index + value.length);
-    }
-  }
-
-  return str;
+  return str.slice(0, index) + str.slice(index + value.length);
 }
 
 /**
@@ -187,17 +171,11 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeLastOccurrences(str, value) {
-  if (value === '') {
+  const index = str.lastIndexOf(value);
+  if (index === -1) {
     return str;
   }
-
-  for (let index = str.length - 1; index >= 0; index -= 1) {
-    if (str.startsWith(value, index)) {
-      return str.slice(0, index) + str.slice(index + value.length);
-    }
-  }
-
-  return str;
+  return str.slice(0, index) + str.slice(index + value.length);
 }
 
 /**
